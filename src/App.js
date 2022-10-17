@@ -3,6 +3,7 @@ import MainPage from "./Pages/MainPage";
 import TestPage from "./Pages/TestPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import TodoListPage from "./Pages/TodoListPage";
+import PostsPage from "./Pages/PostsPage";
 
 function App() {
     return (
@@ -13,6 +14,8 @@ function App() {
                     <Route path="/test/:testId" element={<TestPage/>}></Route>
                     <Route path="*" element={<NotFoundPage/>}></Route>
                     <Route path="/todolist" element={<TodoListPage/>}></Route>
+
+                    <Route path="/posts" element={<PostsPage/>}></Route>
                 </Routes>
             </BrowserRouter>
         </div>
