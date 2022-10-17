@@ -7,22 +7,30 @@ import {useEffect} from "react";
 import {PostsSliderItem} from "./PostsSliderItem";
 
 export const PostsSlider = () => {
-    const [transformCount, useTransformCount] = useState(0);
+    const frontCloneCount = 1;
+    const displayCount = 3;
+
+    const [transformCount, useTransformCount] = useState(-frontCloneCount);
     const [tempPosts, useTempPosts] = useState([]);
     const posts = useSelector((state) => state.PostsReducer.response)
     const dispatch = useDispatch();
-    const displayCount = 3;
 
     useEffect(() => {
         dispatch(getPosts());
     }, []);
 
     useEffect(() => {
-        // let convertPosts = []
-        // for(let i=posts.length-displayCount-1; i<posts.length; i++) {
-        //     convertPosts.push(posts[i])
-        // }
-        // useTempPosts(posts);
+        if(posts.length !== 0) {
+            let convertPosts = []
+            for(let i=posts.length-displayCount*frontCloneCount; i<posts.length; i++) {
+                convertPosts.push(posts[i])
+            }
+            console.log(convertPosts)
+            posts.forEach((post) => {
+                convertPosts.push(post)
+            })
+            useTempPosts(convertPosts);
+        }
     }, [posts])
 
     const clickSliderArrow = (type) => {
