@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment, init } from '../store/CounterSlice'
+import { decrement, increment, init } from '../../store/CounterSlice'
 
 const CountButtonRTK = () => {
     const count = useSelector((state) => state.CounterReducer.value)

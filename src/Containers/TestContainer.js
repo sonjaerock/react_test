@@ -1,8 +1,8 @@
-import TestButton from "../Components/TestButton";
-import TestLink from "../Components/TestLink";
-import CountButton from "../Components/CountButton";
-import CountButtonRTK from "../Components/CountButtonRTK";
-import ApiCallComponent from "../Components/ApiCallComponent";
+import TestButton from "../Components/Test/TestButton";
+import TestLink from "../Components/Test/TestLink";
+import CountButton from "../Components/Counter/CountButton";
+import CountButtonRTK from "../Components/Counter/CountButtonRTK";
+import ApiCallComponent from "../Components/Test/ApiCallComponent";
 
 function TestContainer() {
     return (

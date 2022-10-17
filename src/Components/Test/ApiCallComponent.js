@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getTodoList} from "../store/TodoListSlice";
+import {getTodoList} from "../../store/TodoListSlice";
 
 const ApiCallComponent = () => {
     const todoList = useSelector((state) => state.TodoListReducer.response)
