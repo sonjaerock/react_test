@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {setTodoList, deleteTodoList} from "../../../store/TodoListSlice";
 
 export const TodoListItemButton = ({title, type, todoData}) => {
+    console.log('test')
     const [isPending, useIsPending] = useState(false);
     const dispatch = useDispatch()
     const setTodoListItem = async (type, data) => {
