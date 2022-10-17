@@ -9,9 +9,7 @@ export const callSetTodoList = (data) => {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            completed: data.completed
-        }),
+        body: JSON.stringify(data),
     })
 
     return response.then(res => res.json()).catch(null);

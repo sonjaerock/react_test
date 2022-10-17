@@ -4,18 +4,17 @@ import {useDispatch} from "react-redux";
 import styled from "styled-components";
 import {setTodoList, deleteTodoList} from "../../../store/TodoListSlice";
 
-export const TodoListItemButton = ({title, type, todoData}) => {
-    console.log('test')
+export const TodoListItemButton = ({title, type, todoData, tempTodoData}) => {
     const [isPending, useIsPending] = useState(false);
     const dispatch = useDispatch()
-    const setTodoListItem = async (type, data) => {
+    const setTodoListItem = async (type, data, tempTodoData) => {
         switch(type) {
             case 'put':
                 if(!isPending) {
                     useIsPending(true)
                     await dispatch(setTodoList({
                         id: data.id,
-                        completed: !data.completed
+                        title: tempTodoData.title
                     }))
                     useIsPending(false)
                 }
@@ -43,7 +42,7 @@ export const TodoListItemButton = ({title, type, todoData}) => {
             onClick={async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                await setTodoListItem(type, todoData)}
+                await setTodoListItem(type, todoData, tempTodoData)}
             }>
             {title}
         </StyledTodoListItemButton>

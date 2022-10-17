@@ -29,5 +29,8 @@ const StyledTodoListContainer = styled.div`
   padding: 20px;
   border: 1px solid #d2d2dc;
   background: white;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
 export default TodoListContainer;

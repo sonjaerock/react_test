@@ -87,7 +87,7 @@ const StyledTodoListItemLabel = styled.label`
     color: #61768B;
     position: absolute;
     width: 12px;
-    height: 10px;
+    height: 11px;
     background-color: #61768B;
     
     cursor: pointer;

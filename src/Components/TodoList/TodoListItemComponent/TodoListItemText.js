@@ -1,23 +1,35 @@
 import * as React from 'react';
 import styled from "styled-components";
 import {TodoListItemButton} from "./TodoListItemButton";
+import {useState, useEffect} from "react";
 
 export const TodoListItemText = ({todoData}) => {
+    const [tempTodoData, useTempTodoData] = useState(todoData);
+
     return (
         <StyledTodoListItemTextContainer>
             <StyledTodoListItemTextInput
+                onChange={(e) => {useTempTodoData({
+                    title: e.target.value
+                })}}
                 type="text"
-                value={todoData.title}/>
+                value={tempTodoData.title || ''}/>
+
+            {/*삭제*/}
             <TodoListItemButton
                 todoData={todoData}
                 type={'delete'}
                 title={'Delete'}>
             </TodoListItemButton>
+
+            {/*수정*/}
             <TodoListItemButton
+                tempTodoData = {tempTodoData}
                 todoData={todoData}
                 type={'put'}
                 title={'Adjust'}>
             </TodoListItemButton>
+
         </StyledTodoListItemTextContainer>
     );
 };
@@ -26,7 +38,7 @@ const StyledTodoListItemTextContainer = styled.div`
 `
 
 const StyledTodoListItemTextInput = styled.input`
-  width: 440px;
+  width: 420px;
   border: none;
 
   &:focus {
