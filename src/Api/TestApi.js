@@ -17,3 +17,15 @@ export const callSetTodoList = (data) => {
     return response.then(res => res.json()).catch(null);
 }
 
+export const callDeleteTodoList = (data) => {
+    const response = fetch("https://jsonplaceholder.typicode.com/todos/" + data.id, {
+        method: "delete",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+
+    return response.then(res => res.json()).catch(null);
+}
+
+

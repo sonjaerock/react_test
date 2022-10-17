@@ -2,19 +2,29 @@ import * as React from 'react';
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import styled from "styled-components";
-import {setTodoList} from "../../../store/TodoListSlice";
+import {setTodoList, deleteTodoList} from "../../../store/TodoListSlice";
 
-export const TodoListItemButton = ({todoData}) => {
+export const TodoListItemButton = ({title, type, todoData}) => {
     const [isPending, useIsPending] = useState(false);
     const dispatch = useDispatch()
     const setTodoListItem = async (type, data) => {
         switch(type) {
-            case 'completed':
+            case 'put':
                 if(!isPending) {
                     useIsPending(true)
                     await dispatch(setTodoList({
                         id: data.id,
                         completed: !data.completed
+                    }))
+                    useIsPending(false)
+                }
+                break;
+
+            case 'delete':
+                if(!isPending) {
+                    useIsPending(true)
+                    await dispatch(deleteTodoList({
+                        id: data.id
                     }))
                     useIsPending(false)
                 }
@@ -28,21 +38,23 @@ export const TodoListItemButton = ({todoData}) => {
     return (
         <StyledTodoListItemButton
             disabled={isPending}
-            todoData={todoData}
             isPending={isPending}
             onClick={async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                await setTodoListItem('completed', todoData)}
+                await setTodoListItem(type, todoData)}
             }>
-            <span>{todoData.completed ? 'DONE' : '//:TODO'}</span>
+            {title}
         </StyledTodoListItemButton>
     );
 };
 
 const StyledTodoListItemButton = styled.button`
-    color: ${(props) => {
-        if(props.isPending) return 'grey'
-        return props.todoData.completed ? 'blue' : 'red'}
-    }
+  float: right;
+  height: 20px;
+  margin-left: 10px;
+  color: white;
+  border: 1px #61768B solid;
+  border-radius: 1px;
+  background: #61768B;
 `

@@ -1,38 +1,49 @@
 import * as React from 'react';
 import styled from "styled-components";
+import {TodoListItemButton} from "./TodoListItemButton";
 
 export const TodoListItemText = ({todoData}) => {
     return (
-        <StyleTitleText>
-            <StyleTitleDisplay>
-                {todoData.title}
-            </StyleTitleDisplay>
-            <StyleTitleAdjust>
-            </StyleTitleAdjust>
-            <StyleTitleAdjustButton>
-                수정
-            </StyleTitleAdjustButton>
-        </StyleTitleText>
+        <StyledTodoListItemTextContainer>
+            <StyledTodoListItemTextInput
+                type="text"
+                value={todoData.title}/>
+            <TodoListItemButton
+                todoData={todoData}
+                type={'delete'}
+                title={'Delete'}>
+            </TodoListItemButton>
+            <TodoListItemButton
+                todoData={todoData}
+                type={'put'}
+                title={'Adjust'}>
+            </TodoListItemButton>
+        </StyledTodoListItemTextContainer>
     );
 };
-const StyleTitleText = styled.div`
-  float: left;
-  margin: 0 10px;
-  text-align: center;
-  font-size: 8px;
+const StyledTodoListItemTextContainer = styled.div`
+  width: 100%;
 `
 
-const StyleTitleDisplay = styled.div`
-  float: left;
-  margin: 0 10px;    
-  text-align: center;
+const StyledTodoListItemTextInput = styled.input`
+  width: 440px;
+  border: none;
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px #61768B solid;
+    font-weight: 600;
+  }
 `
 
-const StyleTitleAdjust = styled.textarea`
-  float: left;
-  margin: 0 10px;
+const StyledTodoListItemAdjustButton = styled.button`
+  float: right;
+  height: 20px;
+  margin-left: 10px;
+  color: white;
+  border: 1px #61768B solid;
+  border-radius: 1px;
+  background: #61768B;
+  
 `
 
-const StyleTitleAdjustButton = styled.button`
-    float: left;
-`

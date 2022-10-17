@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import { callGetTodoList, callSetTodoList } from "../Api/TestApi";
+import { callGetTodoList, callSetTodoList, callDeleteTodoList } from "../Api/TestApi";
 
 const initialState = {
     response: [],
@@ -13,8 +13,12 @@ export const getTodoList = createAsyncThunk('todoList/getTodoList',
 
 export const setTodoList = createAsyncThunk('todoList/setTodoList',
     async (payload) => {
-        let response = await callSetTodoList(payload);
-        return response
+        return await callSetTodoList(payload);
+    });
+
+export const deleteTodoList = createAsyncThunk('todoList/DeleteTodoList',
+    async (payload) => {
+        return await callDeleteTodoList(payload).then(() => { return payload.id });
     });
 
 export const TodoListSlice = createSlice({
@@ -57,6 +61,27 @@ export const TodoListSlice = createSlice({
                 // state.response = payload;
             })
             .addCase(setTodoList.rejected, (state, {payload}) => {
+                state.status = 'rejected';
+                state.error = payload;
+            })
+            // deleteTodoList
+            .addCase(deleteTodoList.pending, (state) => {
+                state.status = 'pending';
+                state.error = null;
+            })
+            .addCase(deleteTodoList.fulfilled, (state, {payload}) => {
+                console.log(payload)
+                state.response.forEach((todoListItem, idx) => {
+                    if(todoListItem.id === payload) {
+                        state.response.splice(idx, 1);
+                        return;
+                    }
+                })
+                state.status = 'fulfilled';
+                state.error = null;
+                // state.response = payload;
+            })
+            .addCase(deleteTodoList.rejected, (state, {payload}) => {
                 state.status = 'rejected';
                 state.error = payload;
             })

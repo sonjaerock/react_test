@@ -2,30 +2,34 @@ import * as React from 'react';
 import styled from "styled-components";
 import {TodoListItemButton} from "./TodoListItemComponent/TodoListItemButton";
 import {TodoListItemText} from "./TodoListItemComponent/TodoListItemText";
+import {TodoListItemCheckbox} from "./TodoListItemComponent/TodoListItemCheckbox";
 
 
 export const TodoListItem = ({todoData}) => {
     return (
-        <StyledContainer>
-            <StyledItemComponent>{todoData.id}</StyledItemComponent>
-            <StyledItemComponent>{todoData.userId}</StyledItemComponent>
-            <StyledItemComponent>
+        <StyledTodoListItemLi>
+            <StyledItemComponentLiContainer>
+                <TodoListItemCheckbox todoData={todoData}/>
                 <TodoListItemText todoData={todoData}/>
-            </StyledItemComponent>
-            <StyledItemComponent>
-                <TodoListItemButton todoData={todoData}/>
-            </StyledItemComponent>
-        </StyledContainer>
+            </StyledItemComponentLiContainer>
+        </StyledTodoListItemLi>
     );
 };
 
-const StyledContainer = styled.div`
-  float: left;
-  width: 100%;
-  height: 30px;
+const StyledTodoListItemLi = styled.li`
+  text-align: left;
+  display: flex !important;
+  font-size: .9375rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #f3f3f3;
+  list-style: none;
 `
 
-const StyledItemComponent = styled.div`
-    float:left;
-    font-size: 8px;
+const StyledItemComponentLiContainer = styled.div`
+  display: flex;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  
 `
