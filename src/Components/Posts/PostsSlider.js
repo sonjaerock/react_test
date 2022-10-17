@@ -8,19 +8,27 @@ import {PostsSliderItem} from "./PostsSliderItem";
 
 export const PostsSlider = () => {
     const [transformCount, useTransformCount] = useState(0);
+    const [tempPosts, useTempPosts] = useState([]);
     const posts = useSelector((state) => state.PostsReducer.response)
     const dispatch = useDispatch();
+    const displayCount = 3;
 
     useEffect(() => {
         dispatch(getPosts());
-        console.log('mounted', posts)
     }, []);
+
+    useEffect(() => {
+        // let convertPosts = []
+        // for(let i=posts.length-displayCount-1; i<posts.length; i++) {
+        //     convertPosts.push(posts[i])
+        // }
+        // useTempPosts(posts);
+    }, [posts])
 
     const clickSliderArrow = (type) => {
         useTransformCount(Number(transformCount) + type)
         console.log(transformCount)
     }
-
 
     return (
         <StyledPostsSlider>
@@ -46,7 +54,7 @@ export const PostsSlider = () => {
             <StyledPostsSliderContainer
                 transformCount={transformCount}>
                 {
-                    posts.map((post, idx) => {
+                    tempPosts.map((post, idx) => {
                         return (
                             <PostsSliderItem
                                 key={idx}
