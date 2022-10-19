@@ -4,8 +4,8 @@ import styled, { keyframes, css } from "styled-components";
 import { usePutTodoMutation } from '../../../store/api/TodoApi';
 
 export const TodoListItemCheckbox = ({todoData}) => {
-    const [checked, useChecked] = useState(todoData.completed);
     const [putTodo, { isLoading: isPending }] = usePutTodoMutation()
+    const [checked, useChecked] = useState(todoData.completed);
 
     return (
         <StyledTodoListItemLabel
