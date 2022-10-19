@@ -10,10 +10,10 @@ export const TodoList = ({props}) => {
     return (
         <StyledTodoListUl>
             {
-                todoList?.map((todoItem, idx) => {
+                todoList?.map(( _ , idx) => {
                     return <TodoListItem
                         key={idx}
-                        todoData={todoItem}>
+                        idx={idx}>
                     </TodoListItem>
                 })
             }
