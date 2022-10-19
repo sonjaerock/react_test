@@ -1,31 +1,11 @@
 import * as React from 'react';
 import {useState} from "react";
-import {useDispatch} from "react-redux";
 import styled, { keyframes, css } from "styled-components";
-import {setTodoList} from "../../../store/TodoListSlice";
+import { usePutTodoMutation } from '../../../store/api/TodoApi';
 
 export const TodoListItemCheckbox = ({todoData}) => {
-    const [isPending, useIsPending] = useState(false);
     const [checked, useChecked] = useState(todoData.completed);
-
-    const dispatch = useDispatch()
-    const setTodoListItem = async (type, data) => {
-        switch (type) {
-            case 'completed':
-                if (!isPending) {
-                    useIsPending(true)
-                    await dispatch(setTodoList({
-                        id: data.id,
-                        completed: !data.completed
-                    }))
-                    useIsPending(false)
-                }
-                break;
-
-            default:
-                return;
-        }
-    }
+    const [putTodo, { isLoading: isPending }] = usePutTodoMutation()
 
     return (
         <StyledTodoListItemLabel
@@ -43,7 +23,7 @@ export const TodoListItemCheckbox = ({todoData}) => {
                     useChecked(!checked)
                     e.preventDefault();
                     e.stopPropagation();
-                    await setTodoListItem('completed', todoData)
+                    putTodo({id: todoData.id, data: {completed: !todoData.completed}})
                 }
                 }/>
         </StyledTodoListItemLabel>

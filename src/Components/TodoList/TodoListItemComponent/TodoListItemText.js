@@ -2,10 +2,11 @@ import * as React from 'react';
 import styled from "styled-components";
 import {TodoListItemButton} from "./TodoListItemButton";
 import {useState, useEffect} from "react";
+import { useDeleteTodoMutation } from '../../../store/api/TodoApi';
 
 export const TodoListItemText = ({todoData}) => {
     const [tempTodoData, useTempTodoData] = useState(todoData);
-
+    const [deleteTodo] = useDeleteTodoMutation();
     return (
         <StyledTodoListItemTextContainer>
             <StyledTodoListItemTextInput
@@ -19,7 +20,8 @@ export const TodoListItemText = ({todoData}) => {
             <TodoListItemButton
                 todoData={todoData}
                 type={'delete'}
-                title={'Delete'}>
+                title={'Delete'}
+                onClick={() => deleteTodo(todoData.id)}>
             </TodoListItemButton>
 
             {/*수정*/}
