@@ -1,16 +1,11 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-export const todoApi = createApi({
+export const TodoApi = createApi({
     reducerPath: 'todo',
     // 초기화용 태그
     tagTypes: ['todo'],
     baseQuery: fetchBaseQuery({
-        baseUrl: `https://jsonplaceholder.typicode.com/todos`,
-        prepareHeaders: (header) => {
-            header.set("Content-Type", "application/json");
-            console.log(header.values())
-            return header;
-        }
+        baseUrl: `https://jsonplaceholder.typicode.com/todos`
     }),
     endpoints: (builder) => ({
         getTodoList: builder.query({
@@ -39,4 +34,4 @@ export const todoApi = createApi({
     }),
 });
 
-export const {useGetTodoListQuery, usePutTodoMutation, useDeleteTodoMutation} = todoApi;
+export const TodoApiEndPoints = TodoApi.endpoints;

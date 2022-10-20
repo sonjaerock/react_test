@@ -1,12 +1,14 @@
 import * as React from 'react';
 import {useState} from "react";
 import styled, { keyframes, css } from "styled-components";
-import { usePutTodoMutation } from '../../../store/api/TodoApi';
+import { TodoApiEndPoints } from '../../../store/api/TodoApi';
 
-export const TodoListItemCheckbox = ({todoData}) => {
-    const [putTodo, { isLoading: isPending }] = usePutTodoMutation()
+export const TodoListItemCheckbox = ({idx}) => {
+    const [putTodo, { isLoading: isPending }] = TodoApiEndPoints.putTodo.useMutation();
+    const {data: todoList} = TodoApiEndPoints.getTodoList.useQueryState('');
+    const todoData = todoList[idx]
     const [checked, useChecked] = useState(todoData.completed);
-
+    
     return (
         <StyledTodoListItemLabel
             disabled={isPending}

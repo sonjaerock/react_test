@@ -1,16 +1,15 @@
 import * as React from 'react';
 import styled from "styled-components";
-import {TodoListItemButton} from "./TodoListItemComponent/TodoListItemButton";
 import {TodoListItemText} from "./TodoListItemComponent/TodoListItemText";
 import {TodoListItemCheckbox} from "./TodoListItemComponent/TodoListItemCheckbox";
 
+export const TodoListItem = ({idx}) => {
 
-export const TodoListItem = ({todoData}) => {
     return (
         <StyledTodoListItemLi>
             <StyledItemComponentLiContainer>
-                <TodoListItemCheckbox todoData={todoData}/>
-                <TodoListItemText todoData={todoData}/>
+                <TodoListItemCheckbox idx={idx}/>
+                <TodoListItemText idx={idx}/>
             </StyledItemComponentLiContainer>
         </StyledTodoListItemLi>
     );

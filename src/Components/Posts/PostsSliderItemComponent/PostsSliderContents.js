@@ -1,15 +1,18 @@
 // @flow
 import * as React from 'react';
 import styled, {keyframes} from "styled-components";
+import {PostApiEndPoints} from "../../../store/api/PostApi";
 
-export const PostsSliderContents = ({post}) => {
+export const PostsSliderContents = ({idx}) => {
+    const {data: posts, isFetching, isLoading, isError} = PostApiEndPoints.getPosts.useQueryState('');
+
     return (
         <StylePostsSliderItemContentContainer>
             <StyledPostsSliderItemTitle>
-                {post.title}
+                {posts[idx].title}
             </StyledPostsSliderItemTitle>
             <StyledPostsSliderItemBody>
-                {post.body}
+                {posts[idx].body}
             </StyledPostsSliderItemBody>
 
             <StyledPostsSliderButton>
