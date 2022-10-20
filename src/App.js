@@ -4,6 +4,7 @@ import TestPage from "./Pages/TestPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import TodoListPage from "./Pages/TodoListPage";
 import PostsPage from "./Pages/PostsPage";
+import { UserListPage } from "./Pages/UserListPage";
 
 function App() {
     return (
@@ -14,7 +15,7 @@ function App() {
                     <Route path="/test/:testId" element={<TestPage/>}></Route>
                     <Route path="*" element={<NotFoundPage/>}></Route>
                     <Route path="/todolist" element={<TodoListPage/>}></Route>
-
+                    <Route path="/userlist" element={<UserListPage/>}></Route>
                     <Route path="/posts" element={<PostsPage/>}></Route>
                 </Routes>
             </BrowserRouter>
