@@ -1,11 +1,13 @@
 // @flow
 import * as React from 'react';
 import styled from "styled-components";
+import {PostApiEndPoints} from "../../../store/api/PostApi";
 
-export const PostsSliderImg = ({post}) => {
+export const PostsSliderImg = ({idx}) => {
+    const {data: posts, isFetching, isLoading, isError} = PostApiEndPoints.getPosts.useQueryState('');
     return (
         <StyledPostsSliderImageContainer>
-            <StyledPostsSliderImage src={`https://picsum.photos/id/${post.id + 10}/400/250`}>
+            <StyledPostsSliderImage src={`https://picsum.photos/id/${posts[Number(idx)].id + 10}/400/250`}>
             </StyledPostsSliderImage>
         </StyledPostsSliderImageContainer>
     );
