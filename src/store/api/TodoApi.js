@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-export const todoApi = createApi({
+export const TodoApi = createApi({
     reducerPath: 'todo',
     // 초기화용 태그
     tagTypes: ['todo'],
@@ -34,5 +34,4 @@ export const todoApi = createApi({
     }),
 });
 
-export const {useGetTodoListQueryState, useGetTodoListQuery, usePutTodoMutation, useDeleteTodoMutation} = todoApi;
-export default todoApi;
+export const TodoApiEndPoints = TodoApi.endpoints;

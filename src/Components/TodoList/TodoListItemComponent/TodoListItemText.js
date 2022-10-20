@@ -2,12 +2,11 @@ import * as React from 'react';
 import styled from "styled-components";
 import {TodoListItemButton} from "./TodoListItemButton";
 import {useState, useEffect} from "react";
-import {useDeleteTodoMutation, useGetTodoListQueryState} from '../../../store/api/TodoApi';
-import todoApi from '../../../store/api/TodoApi';
+import { TodoApiEndPoints } from '../../../store/api/TodoApi';
 
 export const TodoListItemText = ({idx}) => {
-    const [deleteTodo] = useDeleteTodoMutation();
-    const {data: todoList} = todoApi.endpoints.getTodoList.useQueryState('');
+    const [deleteTodo] = TodoApiEndPoints.deleteTodo.useMutation();
+    const {data: todoList} = TodoApiEndPoints.getTodoList.useQueryState('');
     const todoData = todoList[idx]
     const [tempTodoData, useTempTodoData] = useState(todoData);
 

@@ -1,8 +1,8 @@
 import React from "react";
-import { useGetTodoListQuery } from "../../store/api/TodoApi";
+import { TodoApiEndPoints } from "../../store/api/TodoApi";
 
 const ApiCallComponent = () => {
-    const {data: todoList} = useGetTodoListQuery('');
+    const {data: todoList} = TodoApiEndPoints.getTodoList.useQuery('');
 
     return (
         <div>
