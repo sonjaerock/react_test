@@ -3,16 +3,14 @@ import styled from "styled-components";
 import {PostsSliderImg} from "./PostsSliderItemComponent/PostsSliderImg";
 import {PostsSliderContents} from "./PostsSliderItemComponent/PostsSliderContents";
 
-export const PostsSliderItem = ({post, idx}) => {
+export const PostsSliderItem = ({idx}) => {
     return (
-        <StyledPostsSliderItem idx={idx}>
+        <StyledPostsSliderItem>
             <PostsSliderImg
-                post={post}
                 idx={idx}>
 
             </PostsSliderImg>
             <PostsSliderContents
-                post={post}
                 idx={idx}>
             </PostsSliderContents>
         </StyledPostsSliderItem>

@@ -1,42 +1,35 @@
 import * as React from 'react';
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
-import {useState} from "react";
-import {getPosts} from "../../store/PostsSlice";
-import {useEffect} from "react";
+import {useState, useEffect} from "react";
 import {PostsSliderItem} from "./PostsSliderItem";
+import {PostApiEndPoints} from "../../store/api/PostApi";
 
 export const PostsSlider = () => {
     const frontCloneCount = 1;
     const displayCount = 3;
-
+    const {data: posts, isFetching, isLoading, isError} = PostApiEndPoints.getPosts.useQuery('');
     const [transformCount, useTransformCount] = useState(-frontCloneCount);
-    const [tempPosts, useTempPosts] = useState([]);
-    const posts = useSelector((state) => state.PostsReducer.response)
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getPosts());
-    }, []);
-
-    useEffect(() => {
-        if(posts.length !== 0) {
-            let convertPosts = []
-            for(let i=posts.length-displayCount*frontCloneCount; i<posts.length; i++) {
-                convertPosts.push(posts[i])
-            }
-            console.log(convertPosts)
-            posts.forEach((post) => {
-                convertPosts.push(post)
-            })
-            useTempPosts(convertPosts);
-        }
-    }, [posts])
+    // let tempPosts = []
+    // if(posts) {
+    //     let convertPosts = []
+    //     for (let i = posts.length - displayCount * frontCloneCount; i < posts.length; i++) {
+    //         convertPosts.push(posts[i])
+    //     }
+    //     console.log(convertPosts)
+    //     posts.forEach((post) => {
+    //         convertPosts.push(post)
+    //     })
+    //     tempPosts = convertPosts
+    // }
 
     const clickSliderArrow = (type) => {
         useTransformCount(Number(transformCount) + type)
         console.log(transformCount)
     }
+
+    if(isFetching) return (<div>fetching...</div>)
+    if(isLoading) return (<div>loading...</div>)
 
     return (
         <StyledPostsSlider>
@@ -62,12 +55,11 @@ export const PostsSlider = () => {
             <StyledPostsSliderContainer
                 transformCount={transformCount}>
                 {
-                    tempPosts.map((post, idx) => {
+                    posts.map((_, idx) => {
                         return (
                             <PostsSliderItem
                                 key={idx}
-                                idx={idx}
-                                post={post}>
+                                idx={idx}>
                             </PostsSliderItem>
                         )
                     })
